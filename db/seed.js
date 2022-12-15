@@ -7,8 +7,6 @@ const {
   updatePost,
   getAllPosts,
   getUserById,
-  createTags,
-  addTagsToPost,
   getPostsByTagName
  } = require('./index')
  
@@ -131,7 +129,6 @@ async function createInitialPosts() {
     throw error;
   }
 }
-
 
 async function rebuildDB() {
   try {

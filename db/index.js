@@ -241,8 +241,7 @@ async function getPostsByTagName(tagName) {
   } catch (error) {
     throw error;
   }
-} 
-
+}
 
 // ********* TAGS ********
 async function createTags(tagList) {
