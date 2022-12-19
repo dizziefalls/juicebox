@@ -2,9 +2,12 @@ const express = require('express')
 const { 
   getAllUsers,
   getUserByUsername,
-  createUser
+  getUserById,
+  createUser,
+  updateUser
  } = require('../db')
 const jwt = require('jsonwebtoken')
+const { requireUser } = require('./utils')
 const usersRouter = express.Router()
 
 usersRouter.use((req, res, next) => {
@@ -85,6 +88,32 @@ usersRouter.post('/register', async (req, res, next) => {
       token
     })
 
+  } catch ({ name, message }) {
+    next({ name, message })
+  }
+})
+
+usersRouter.delete('/:userId', requireUser, async (req, res, next) => {
+  const userId = req.params.userId
+
+  try {
+    const userQuery = await getUserById(userId)
+    if (userQuery) {
+      if (userQuery.id === req.user.id) {
+        const deletedUser = await updateUser(userId, {active: false})
+        res.send({user: deletedUser})
+      } else {
+        next({
+          name: 'UnauthorizedUserError',
+          message: "Ain't your account to deactivate bud"
+        })
+      }
+    } else {
+      next({
+        name: 'UserNotFoundError',
+        message: "Can't find that user pal"
+      })
+    }
   } catch ({ name, message }) {
     next({ name, message })
   }
