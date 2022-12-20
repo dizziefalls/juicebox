@@ -24,6 +24,33 @@ server.get('/', (req, res, next) => {
   </head>
   <body>
     <h1>Just a placeholder for the juicebox API docs</h1>
+    <h2>Endpoints</h2>
+    <h3>/users</h3>
+    <ul>
+      <li>GET /</li>
+      <li>POST /register</li>
+      <li>POST /login</li>
+      <li>DELETE /:userId</li>
+    </ul>
+    <h3>/posts</h3>
+    <ul>
+      <li>GET /</li>
+      <li>POST /</li>
+      <li>PATCH /:postId</li>
+      <li>DELETE /:postId</li>
+    </ul>
+    <h3>/tags</h3>
+    <ul>
+      <li>GET /</li>
+      <li>GET /:tagName/posts</li>
+    </ul>
+    <h2>Construction Plans</h2>
+    <ul>
+      <li>Convert this page to static markdown</li>
+      <li>Implement deactivated user functionality</li>
+      <li>Write docs</li>
+      <li>Make giant $$$$ in FOSS <small>(Cry softly)</small></li>
+    </ul>
   </body>
   </html>`)
 })
