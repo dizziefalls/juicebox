@@ -3,6 +3,7 @@ require('dotenv').config()
 const PORT = 3000
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const apiRouter = require('./api')
 const { client } = require('./db')
 
@@ -12,6 +13,8 @@ const server = express();
 
 server.use(morgan('dev'))
 server.use(express.json())
+server.use(cors())
+
 server.get('/', (req, res, next) => {
   res.send(`
     <!DOCTYPE html>
