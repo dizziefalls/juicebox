@@ -51,7 +51,7 @@ server.get('/', (req, res, next) => {
       <h2>Construction Plans</h2>
       <ul>
         <li>Convert this page to static markdown</li>
-        <li>Implement deactivated user functionality</li>
+        <li>Implement deactivated user functionality &#x2714;</li>
         <li>Write docs</li>
         <li>Make giant $$$$ in FOSS <small>(Cry softly)</small></li>
         <li>Write a demo react frontend to show off endpoints</li>
