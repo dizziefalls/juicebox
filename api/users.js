@@ -93,6 +93,32 @@ usersRouter.post('/register', async (req, res, next) => {
   }
 })
 
+usersRouter.patch('/:userId', requireUser, async (req, res, next) => {
+  const userId = req.params.userId
+
+  try {
+    const userQuery = await getUserById(userId)
+    if (userQuery) {
+      if (userQuery.id === req.user.id) {
+        const activeUser = await updateUser(userId, {active: true})
+        res.send({user: activeUser})
+      } else {
+        next({
+          name: 'UnauthorizedUserError',
+          message: "Ain't your account to deactivate bud"
+        })
+      }
+    } else {
+      next({
+        name: 'UserNotFoundError',
+        message: "Can't find that user pal"
+      })
+    }
+  } catch ({ name, message }) {
+    next({ name, message })
+  }
+})
+
 usersRouter.delete('/:userId', requireUser, async (req, res, next) => {
   const userId = req.params.userId
 
