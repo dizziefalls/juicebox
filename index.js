@@ -33,6 +33,7 @@ server.get('/', (req, res, next) => {
         <li>GET /</li>
         <li>POST /register</li>
         <li>POST /login</li>
+        <li>PATCH /:userId</li>
         <li>DELETE /:userId</li>
       </ul>
       <h3>/posts</h3>

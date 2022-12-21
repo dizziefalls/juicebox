@@ -17,6 +17,8 @@ function requireActiveUser(req, res, next) {
       message: 'You must reactivate your account to proceed'
     })
   }
+
+  next()
 }
 
 module.exports = {
