@@ -11,11 +11,14 @@ const {
 
 postsRouter.get('/', async (req, res) => {
   const allPosts = await getAllPosts()
+  //Adds allowing a deactivated user to see their posts.
+  let userId 
+  req.user ? userId = req.user.id : null
   const posts = allPosts.filter(post => {
     //Ah the workshop ruined my fun writing this haha
     //Return posts that are either active or match the current user's id
     //Hmm don't think author has active. I'll have to add that
-    return (post.active || (req.user && post.author.id === req.user.id)) && post.author.active
+    return (post.active || (req.user && post.author.id === req.user.id)) && (post.author.active || post.author.id === userId)
   })
   res.send({
     posts

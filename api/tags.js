@@ -28,7 +28,7 @@ tagsRouter.get('/:tagName/posts', async (req, res, next) => {
       res.send({ userPosts })
     } else { //if not logged in
       const taggedPosts = allTaggedPosts.filter(post => {
-        return post.active
+        return post.active && post.author.active
       })
       res.send({ taggedPosts })
     }
