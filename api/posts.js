@@ -1,6 +1,6 @@
 const express = require('express')
 const postsRouter = express.Router()
-const { requireUser } = require('./utils')
+const { requireUser, requireActiveUser } = require('./utils')
 const { 
   getAllPosts,
   createPost,
@@ -25,7 +25,7 @@ postsRouter.get('/', async (req, res) => {
   })
 })
 
-postsRouter.post('/', requireUser, async (req, res, next) => {
+postsRouter.post('/', requireUser, requireActiveUser, async (req, res, next) => {
   const { title, content, tags = "" } = req.body;
 
   const tagArr = tags.trim().split(/\s+/)
@@ -50,7 +50,7 @@ postsRouter.post('/', requireUser, async (req, res, next) => {
   }
 })
 
-postsRouter.patch('/:postId', requireUser, async (req, res, next) => {
+postsRouter.patch('/:postId', requireUser, requireActiveUser, async (req, res, next) => {
   const { postId } = req.params
   const { title, content, tags } = req.body
   
@@ -91,7 +91,7 @@ postsRouter.patch('/:postId', requireUser, async (req, res, next) => {
   }
 })
 
-postsRouter.delete('/:postId', requireUser, async (req, res, next) => {
+postsRouter.delete('/:postId', requireUser, requireActiveUser, async (req, res, next) => {
   //I found this method funny when we were creating stranger's things
   //Why keep all posts when they're deleted? I understand how being able to recover them might be nice. But there should certainly be an option to permanently delete them as well.
   try {

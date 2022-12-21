@@ -10,6 +10,16 @@ function requireUser(req, res, next) {
   next();
 }
 
+function requireActiveUser(req, res, next) {
+  if (!req.user.active) {
+    next({
+      name: 'DeactivatedUserError',
+      message: 'You must reactivate your account to proceed'
+    })
+  }
+}
+
 module.exports = {
-  requireUser
+  requireUser,
+  requireActiveUser
 }
